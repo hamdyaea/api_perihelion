@@ -5,7 +5,7 @@
   
 This is the source code of the api perihelion from astrometry.ch       
   
-This api is build in Python with the Flask library.      
+This api is build in Python3 with the Flask library.      
   
 Developer : Hamdy Abou El Anein  
    
