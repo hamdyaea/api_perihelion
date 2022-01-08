@@ -23,6 +23,4 @@ class Peri(Resource):
         return "Object not found", 404
 
 
-#api.add_resource(Peri, "/perihelion", "/perihelion/", "/perihelion/<int:id>")
-
 api.add_resource(Peri, "/", "/", "/<int:id>")
