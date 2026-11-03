@@ -1,11 +1,11 @@
-class HerokuConfig(ProductionConfig):
+# Developer: Hamdy Abou El Anein
+# Contact: hamdy.aea@protonmail.com
+"""Optional logging configuration, with no import-time side effects."""
+import logging
+
+class HerokuConfig:
     @classmethod
     def init_app(cls, app):
-        ProductionConfig.init_app(app)
-
-    import logging
-    from logging import StreamHandler
-
-    file_handler = StreamHandler()
-    file_handler.setLevel(logging.WARNING)
-    app.logger.addHandler(file_handler)
+        handler = logging.StreamHandler()
+        handler.setLevel(logging.WARNING)
+        app.logger.addHandler(handler)
