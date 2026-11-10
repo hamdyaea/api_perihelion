@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
-# Developer : Hamdy Abou El Anein
-# hamdy.aea@protonmail.com
-# This is the Python api of astrometry.ch
+# Developer: Hamdy Abou El Anein
+# Contact: hamdy.aea@protonmail.com
+"""Read-only perihelion API; preserve the original JSON response shapes."""
+from flask import Flask, jsonify
+from data import perihelion
 
 
-from flask import Flask
-from flask_restful import Api, Resource
-from data import *
+def create_app():
+    app = Flask(__name__)
+
+    @app.get("/")
+    @app.get("/0")
+    def list_objects():
+        return jsonify(perihelion)
+
+    @app.get("/<int:object_id>")
+    def get_object(object_id):
+        for item in perihelion:
+            if item["id"] == object_id:
+                return jsonify(item)
+        return jsonify("Object not found"), 404
+
+    return app
 
 
-app = Flask(__name__)
-api = Api(app)
-
-
-class Peri(Resource):
-    def get(self, id=0):
-        if id == 0:
-            return perihelion, 200
-        for peri in perihelion:
-            if peri["id"] == id:
-                return peri, 200
-        return "Object not found", 404
-
-
-api.add_resource(Peri, "/", "/", "/<int:id>")
+app = create_app()

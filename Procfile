@@ -1,1 +1,1 @@
-web gunicorn api-astrometry:app
+web: gunicorn app:app
